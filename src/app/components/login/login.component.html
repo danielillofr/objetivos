@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h2>Login de usuario</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-2" style="text-align: center">
+            <form role="form">
+                <div class="form-group">
+
+                    <label for="exampleInputEmail1">
+                        Usuario
+                      </label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" [(ngModel)]="usuario" name="usuario" />
+                </div>
+                <div class="form-group">
+
+                    <label for="exampleInputPassword1">
+                        Password
+                      </label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="clave" name="clave" />
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" (click)="Login()">
+                              Aceptar
+                            </button>
+                </div>
+                <div class="text-center">
+                    {{errorAcceso}}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
