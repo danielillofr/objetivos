@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs';
-import { TipoUsuario } from './../interfaces/usuario.interface';
+import { TipoUsuario, RespuestaListaUsuarios } from './../interfaces/usuario.interface';
 
 
 
@@ -59,6 +59,29 @@ export class ApihttpService {
     };
     // return this.http.put(`http://localhost:3000/api/usuarios/${id}`, {nombre: 'Nuevo nombre'}, opciones);
     return this.http.put(`${this.env}/api/usuarios/${id}`, {nombre: 'Nuevo nombre'}, opciones);
+  }
+
+  //Solicitar los usuarios del usuario que está logueado
+
+  Obtener_usuarios_de_aprobador = () => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.token
+      })
+    };
+    return new Promise((resolve,reject) => {
+      this.http.get<RespuestaListaUsuarios>(`${this.env}/api/usuarios`, opciones)
+        .subscribe((respuesta) => {
+          if (!respuesta.ok) {
+            console.log('Error obteniendo lista de usuarios:', respuesta);
+            reject('Error obteniendo lista de usuarios:');
+          }
+          resolve (respuesta.usuarios);
+        }, (err) => {
+          console.log('Error accediendo a la base de datos:', err);
+          reject ('Error obteniendo lista de usuarios:');
+        });
+    });
   }
 
 }

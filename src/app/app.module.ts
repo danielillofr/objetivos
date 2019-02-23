@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 
 import { app_routing } from './app.routes';
 import { HomeComponent } from './components/home/home.component';
+import { ListUsersComponent } from './components/list-users/list-users.component';
 
 
 
@@ -17,7 +18,8 @@ import { HomeComponent } from './components/home/home.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ListUsersComponent
   ],
   imports: [
     BrowserModule,

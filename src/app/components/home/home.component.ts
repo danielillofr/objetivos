@@ -13,7 +13,11 @@ export class HomeComponent implements OnInit {
 
   constructor(private apihttpservice: ApihttpService) {
     this.titulo = `Usuario: ${apihttpservice.usuarioApp.nombreCompleto}`;
-   }
+    const role = apihttpservice.usuarioApp.role;
+    if ((role === 'COORDINADOR') || (role === 'DIRECTOR')) {
+
+    }
+  }
 
   ngOnInit() {
   }

@@ -5,3 +5,10 @@ export interface TipoUsuario {
   role: String
 }
 
+export interface RespuestaListaUsuarios {
+  ok: boolean,
+  errBaseDatos?: boolean,
+  err?: String,
+  usuarios: TipoUsuario[]
+}
+
