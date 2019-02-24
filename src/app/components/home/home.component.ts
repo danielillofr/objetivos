@@ -22,10 +22,12 @@ export class HomeComponent implements OnInit {
   constructor(private apihttpservice: ApihttpService,
               private objetivosservice: ObjetivosService,
               private activatedroute: ActivatedRoute, private router: Router) {
+    //Comprobamos que estamos logueado, y si no, al /
     if (!apihttpservice.logueado) {
       router.navigate(['/']);
       return;
     }
+    //Creamos el formulario con todos los campos
     this.formularioUsuario = new FormGroup({
       planificado_dias: new FormControl(''),
       planificado_porcentaje: new FormControl(''),
@@ -39,8 +41,10 @@ export class HomeComponent implements OnInit {
       incidencia_porcentaje: new FormControl(''),
       incidenciaVsTotal: new FormControl('')
     })
+    //Obtenemos el id del usuario desde la url
     activatedroute.params.subscribe(params => {
       this.idUsuario = params.idUsuario;
+      //Obtenemos los datos de usuario desde la estructura
       objetivosservice.Obtener_datos_usuario(params.idUsuario)
       .then((respuesta) => {
         this.datosUsuario = <TipoDatosUsuario>respuesta;
@@ -56,7 +60,6 @@ export class HomeComponent implements OnInit {
         let porcentajeTotal: number = <number>this.datosUsuario.datos.porcentajeConseguido;
         porcentajeTotal += <number>this.datosUsuario.datos.incidencias.porcentaje;
         this.formularioUsuario.controls['porcentaje_total'].setValue(`${porcentajeTotal}%`)
-
         //Proyecto
         this.formularioUsuario.controls['proyecto_dias'].setValue(this.datosUsuario.datos.proyecto.dias);
         this.formularioUsuario.controls['proyecto_porcentaje'].setValue(`${this.datosUsuario.datos.proyecto.porcentaje}%`);

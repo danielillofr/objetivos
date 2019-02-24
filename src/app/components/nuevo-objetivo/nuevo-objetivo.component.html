@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <form [formGroup]="formularioObjetivo">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="nombre">
+                      Nombre
+                    </label>
+                    <input type="text" class="form-control" formControlName="nombre" id="nombre" [ngClass]="{'is-invalid': formularioObjetivo.controls['nombre'].errors}">
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+{{formularioObjetivo.controls['nombre'].errors}}

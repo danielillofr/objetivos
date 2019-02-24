@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FechaAFormatoPipe } from './pipes/fecha-aformato.pipe';
 import { LabAPorPipe } from './pipes/lab-apor.pipe';
 import { ConAPorPipe } from './pipes/con-apor.pipe';
+import { NuevoObjetivoComponent } from './components/nuevo-objetivo/nuevo-objetivo.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ConAPorPipe } from './pipes/con-apor.pipe';
     ListUsersComponent,
     FechaAFormatoPipe,
     LabAPorPipe,
-    ConAPorPipe
+    ConAPorPipe,
+    NuevoObjetivoComponent
   ],
   imports: [
     BrowserModule,
