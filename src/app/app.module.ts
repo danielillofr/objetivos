@@ -6,12 +6,13 @@ import { LoginComponent } from './components/login/login.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import {FormsModule} from '@angular/forms';
 
 import { app_routing } from './app.routes';
 import { HomeComponent } from './components/home/home.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FechaAFormatoPipe } from './pipes/fecha-aformato.pipe';
 
 
 @NgModule({
@@ -19,13 +20,15 @@ import { ListUsersComponent } from './components/list-users/list-users.component
     AppComponent,
     LoginComponent,
     HomeComponent,
-    ListUsersComponent
+    ListUsersComponent,
+    FechaAFormatoPipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    app_routing
+    app_routing,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

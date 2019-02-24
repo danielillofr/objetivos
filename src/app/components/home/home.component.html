@@ -4,4 +4,66 @@
             <h2>{{titulo}} </h2>
         </div>
     </div>
+    <hr>
+    <form [formGroup]="formularioUsuario">
+        <div class="form-group">
+            <div class="row" *ngIf="datosUsuario">
+                <div class="col-md-4">
+                    <h4 style="position: relative; height: 50%; top: 25%">Planificado</h4>
+                </div>
+                <div class="col-md-1">
+                    <label for="planificado_dias">
+                      Dias
+                    </label>
+                    <input disabled="true" class="form-control" formControlName="planificado_dias" type="text" id="planificado_dias">
+                </div>
+                <div class="col-md-1">
+                    <label for="planificado_porcentaje">
+                      Porcentaje
+                    </label>
+                    <input disabled="true" class="form-control" formControlName="planificado_porcentaje" type="text" id="planificado_porcentaje">
+                </div>
+                <div class="col-md-2">
+                    <label for="fechaPlan">
+                      Fecha fin planificación
+                    </label>
+                    <input disabled="true" class="form-control" formControlName="fechaPlan" type="text" id="fechaPlan">
+                </div>
+                <div class="col-md-1">
+                    <label for="porcentaje_conseguido">
+                      Conseguido
+                    </label>
+                    <input disabled="true" class="form-control" formControlName="porcentaje_conseguido" type="text" id="porcentaje_conseguido">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <div class="row" *ngIf="datosUsuario">
+                <div class="col-md-4">
+                    <h4 style="position: relative; height: 50%; top: 25%">Proyectos</h4>
+                </div>
+                <div class="col-md-1">
+                    <label for="proyecto_dias">
+                  Dias
+                </label>
+                    <input disabled="true" class="form-control" formControlName="proyecto_dias" type="text" id="proyecto_dias">
+                </div>
+                <div class="col-md-2">
+                    <label for="proyecto_porcentaje">
+                  ProyectoVsAño
+                </label>
+                    <input disabled="true" class="form-control" formControlName="proyecto_porcentaje" type="text" id="proyecto_porcentaje">
+                </div>
+                <div class="col-md-2">
+                    <label for="proyectoVsTotal">
+                  ProyectoVsTotal
+                </label>
+                    <input disabled="true" class="form-control" formControlName="proyectoVsTotal" type="text" id="proyectoVsTotal">
+                </div>
+            </div>
+
+        </div>
+        <hr>
+    </form>
 </div>
