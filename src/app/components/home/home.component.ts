@@ -30,10 +30,14 @@ export class HomeComponent implements OnInit {
       planificado_dias: new FormControl(''),
       planificado_porcentaje: new FormControl(''),
       porcentaje_conseguido: new FormControl(''),
+      porcentaje_total: new FormControl(''),
       fechaPlan: new FormControl(''),
       proyecto_dias : new FormControl(''),
       proyecto_porcentaje: new FormControl(''),
-      proyectoVsTotal: new FormControl('')
+      proyectoVsTotal: new FormControl(''),
+      incidencia_dias : new FormControl(''),
+      incidencia_porcentaje: new FormControl(''),
+      incidenciaVsTotal: new FormControl('')
     })
     activatedroute.params.subscribe(params => {
       this.idUsuario = params.idUsuario;
@@ -46,13 +50,21 @@ export class HomeComponent implements OnInit {
         this.formularioUsuario.controls['planificado_porcentaje'].setValue(`${this.datosUsuario.datos.totales.porcentaje}%`);
         let fecha = new Date();
         fecha.setTime(Date.parse(<string>this.datosUsuario.datos.fechaPlan));
-        let fechaString = fecha.getDate() + '/' + fecha.getMonth() + '/' + fecha.getFullYear();
+        let fechaString = fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear();
         this.formularioUsuario.controls['fechaPlan'].setValue(fechaString);
         this.formularioUsuario.controls['porcentaje_conseguido'].setValue(`${this.datosUsuario.datos.porcentajeConseguido}%`)
+        let porcentajeTotal: number = <number>this.datosUsuario.datos.porcentajeConseguido;
+        porcentajeTotal += <number>this.datosUsuario.datos.incidencias.porcentaje;
+        this.formularioUsuario.controls['porcentaje_total'].setValue(`${porcentajeTotal}%`)
+
         //Proyecto
         this.formularioUsuario.controls['proyecto_dias'].setValue(this.datosUsuario.datos.proyecto.dias);
         this.formularioUsuario.controls['proyecto_porcentaje'].setValue(`${this.datosUsuario.datos.proyecto.porcentaje}%`);
         this.formularioUsuario.controls['proyectoVsTotal'].setValue(`${this.datosUsuario.datos.proyecto.vsTotal}%`);
+        //Incidencia
+        this.formularioUsuario.controls['incidencia_dias'].setValue(this.datosUsuario.datos.incidencias.dias);
+        this.formularioUsuario.controls['incidencia_porcentaje'].setValue(`${this.datosUsuario.datos.incidencias.porcentaje}%`);
+        this.formularioUsuario.controls['incidenciaVsTotal'].setValue(`${this.datosUsuario.datos.incidencias.vsTotal}%`);
 
 
 

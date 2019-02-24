@@ -13,6 +13,8 @@ import { ListUsersComponent } from './components/list-users/list-users.component
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FechaAFormatoPipe } from './pipes/fecha-aformato.pipe';
+import { LabAPorPipe } from './pipes/lab-apor.pipe';
+import { ConAPorPipe } from './pipes/con-apor.pipe';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { FechaAFormatoPipe } from './pipes/fecha-aformato.pipe';
     LoginComponent,
     HomeComponent,
     ListUsersComponent,
-    FechaAFormatoPipe
+    FechaAFormatoPipe,
+    LabAPorPipe,
+    ConAPorPipe
   ],
   imports: [
     BrowserModule,
