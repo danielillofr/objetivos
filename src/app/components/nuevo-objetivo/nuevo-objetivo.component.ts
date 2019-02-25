@@ -27,8 +27,8 @@ export class NuevoObjetivoComponent implements OnInit {
     }
     this.formularioObjetivo = new FormGroup ({
       nombre: new FormControl('', [Validators.minLength(3), Validators.required]),
-      fechaInicio: new FormControl('1/1/2019'),
-      fechaFin: new FormControl('1/1/2019'),
+      fechaInicio: new FormControl('1/1/2019', [this.validar_fecha, Validators.pattern('([0-9]+)/([0-9]+)/([0-9]+)')]),
+      fechaFin: new FormControl('1/1/2019', [this.validar_fecha, Validators.pattern('([0-9]+)/([0-9]+)/([0-9]+)')]),
       conseguido: new FormControl('0')
     })
     activatedroute.params.subscribe(params => {
@@ -53,6 +53,10 @@ export class NuevoObjetivoComponent implements OnInit {
 
    Crear_objetivo = () => {
      console.log('Creando objetivo');
+     if (this.formularioObjetivo.invalid) {
+       alert('Hay errores en el formulario');
+       return;
+     }
      let objetivoCrear = {
       usuario: this.idUsuario,
       nombre: this.formularioObjetivo.controls['nombre'].value,
@@ -62,11 +66,36 @@ export class NuevoObjetivoComponent implements OnInit {
     this.objetivoservice.Crear_objetivo(objetivoCrear)
       .then(resultado => {
         console.log('Objetivo creado');
-        this.router.navigate(['/']);
+        this.router.navigate(['/home', this.idUsuario]);
       })
       .catch(err => {
         alert('Error creando el objetivo');
       })
+   }
+
+   validar_fecha = (c: FormControl) => {
+     let cadena:string = c.value;
+     console.log(cadena);
+     const partes = cadena.split('/');
+     if (partes.length < 3) {
+       return {
+         validateDate: {
+           valid: false
+         }
+       }
+     }
+     const dia = Number(partes[0]);
+     const mes = Number(partes[1]);
+     const ano = Number(partes[2]);
+     if ((dia < 1) || (dia > 31) || (mes < 1) || (mes > 12) || (ano != 2019)){
+       return {
+         validateDate: {
+           valid: false
+         }
+       }
+     }
+     return null;
+
    }
 
   ngOnInit() {
