@@ -1,16 +1,48 @@
 <div class="container-fluid">
+    <h2>Creación de objetivo</h2>
     <form [formGroup]="formularioObjetivo">
         <div class="form-group">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="text-align:center">
                     <label for="nombre">
                       Nombre
                     </label>
                     <input type="text" class="form-control" formControlName="nombre" id="nombre" [ngClass]="{'is-invalid': formularioObjetivo.controls['nombre'].errors}">
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2" style="text-align:center">
+                    <label for="fechaInicio">
+                        Fecha inicio
+                    </label>
+                    <input type="text" class="form-control" formControlName="fechaInicio" id="fechaInicio" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaInicio'].errors}">
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2" style="text-align: center">
+                    <label for="fechaFin">
+                        Fecha fin
+                    </label>
+                    <input type="text" class="form-control" formControlName="fechaFin" id="fechaFin" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaFin'].errors}">
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2" style="text-align: center">
+                    <label for="conseguido">
+                        Conseguido
+                    </label>
+                    <input type="text" class="form-control" formControlName="conseguido" id="conseguido" disabled="true">
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <button class="btn btn-block btn-success" (click)="Crear_objetivo()">Crear objetivo</button>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
 
         </div>
     </form>
 </div>
-{{formularioObjetivo.controls['nombre'].errors}}

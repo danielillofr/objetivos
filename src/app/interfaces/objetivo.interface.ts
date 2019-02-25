@@ -13,6 +13,13 @@ export interface TipoObjetivo {
   diasProyecto: Number
 }
 
+export interface TipoRespuestaObjetivo {
+  ok: boolean,
+  errBaseDatos?: boolean,
+  err?: string,
+  objetivo: TipoObjetivo
+}
+
 export interface TipoDatosUsuario {
   usuario: TipoUsuario,
   objetivos: TipoObjetivo[],

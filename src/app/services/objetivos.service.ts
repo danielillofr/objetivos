@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApihttpService } from './apihttp.service';
 import { TipoRespuestaDatosUsuario } from './../interfaces/objetivo.interface';
+import { TipoObjetivo, TipoRespuestaObjetivo } from '../interfaces/objetivo.interface';
 
 
 
@@ -35,4 +36,26 @@ export class ObjetivosService {
         })
     })
   }
+
+  Crear_objetivo = (objetivo: any) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.apihttpservice.token
+      })
+    };
+    return new Promise((resolve,reject) => {
+      this.http.post<TipoRespuestaObjetivo>(`${this.env}/api/objetivos`, objetivo, opciones)
+        .subscribe(respuesta => {
+          if (!respuesta.ok) {
+            console.log('Error creando objetivo:', respuesta);
+            reject('Error creando objetivo');
+          }
+          resolve(respuesta.objetivo);
+        }, err => {
+          console.log('Error accediendo a la base de datos:', err);
+          reject ('Error obteniendo lista de usuarios:');
+        })
+    })
+  }
+
 }
