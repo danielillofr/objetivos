@@ -16,6 +16,7 @@ import { FechaAFormatoPipe } from './pipes/fecha-aformato.pipe';
 import { LabAPorPipe } from './pipes/lab-apor.pipe';
 import { ConAPorPipe } from './pipes/con-apor.pipe';
 import { NuevoObjetivoComponent } from './components/nuevo-objetivo/nuevo-objetivo.component';
+import { ModobjetivoComponent } from './components/modobjetivo/modobjetivo.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { NuevoObjetivoComponent } from './components/nuevo-objetivo/nuevo-objeti
     FechaAFormatoPipe,
     LabAPorPipe,
     ConAPorPipe,
-    NuevoObjetivoComponent
+    NuevoObjetivoComponent,
+    ModobjetivoComponent
   ],
   imports: [
     BrowserModule,

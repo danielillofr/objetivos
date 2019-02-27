@@ -1,13 +1,13 @@
 <div class="container-fluid">
-    <h2>Creación de objetivo</h2>
+    <h2>Detalle del objetivo</h2>
     <form [formGroup]="formularioObjetivo">
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8" style="text-align:center">
                     <label for="nombre">
-                      Nombre
-                    </label>
+                    Nombre
+                  </label>
                     <input type="text" class="form-control" formControlName="nombre" id="nombre" [ngClass]="{'is-invalid': formularioObjetivo.controls['nombre'].errors}">
                     <small *ngIf="formularioObjetivo.controls['nombre'].errors">Longitud mínima, tres caracteres</small>
 
@@ -17,36 +17,27 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-2" style="text-align:center">
                     <label for="fechaInicio">
-                        Fecha inicio
-                    </label>
+                      Fecha inicio
+                  </label>
                     <input type="text" class="form-control" formControlName="fechaInicio" id="fechaInicio" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaInicio'].errors}">
                     <small *ngIf="formularioObjetivo.controls['fechaInicio'].errors">Fecha inválida</small>
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2" style="text-align: center">
                     <label for="fechaFin">
-                        Fecha fin
-                    </label>
+                      Fecha fin
+                  </label>
                     <input type="text" class="form-control" formControlName="fechaFin" id="fechaFin" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaFin'].errors}">
                     <small *ngIf="formularioObjetivo.controls['fechaFin'].errors">Fecha inválida</small>
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2" style="text-align: center">
                     <label for="conseguido">
-                        Conseguido
-                    </label>
+                      Conseguido
+                  </label>
                     <input type="text" class="form-control" formControlName="conseguido" id="conseguido">
                 </div>
             </div>
-            <br><br>
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <button class="btn btn-block btn-success" (click)="Crear_objetivo()">Crear objetivo</button>
-                </div>
-                <div class="col-md-4"></div>
-            </div>
-
         </div>
     </form>
 </div>

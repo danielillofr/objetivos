@@ -29,17 +29,17 @@ export class HomeComponent implements OnInit {
     }
     //Creamos el formulario con todos los campos
     this.formularioUsuario = new FormGroup({
-      planificado_dias: new FormControl(''),
-      planificado_porcentaje: new FormControl(''),
-      porcentaje_conseguido: new FormControl(''),
-      porcentaje_total: new FormControl(''),
-      fechaPlan: new FormControl(''),
-      proyecto_dias : new FormControl(''),
-      proyecto_porcentaje: new FormControl(''),
-      proyectoVsTotal: new FormControl(''),
-      incidencia_dias : new FormControl(''),
-      incidencia_porcentaje: new FormControl(''),
-      incidenciaVsTotal: new FormControl('')
+      planificado_dias: new FormControl({value:'', disabled: true}),
+      planificado_porcentaje: new FormControl({value:'',disabled: true}),
+      porcentaje_conseguido: new FormControl({value: '', disabled: true}),
+      porcentaje_total: new FormControl({value:'',disabled:true}),
+      fechaPlan: new FormControl({value:'', disabled: true}),
+      proyecto_dias : new FormControl({value:'', disabled: true}),
+      proyecto_porcentaje: new FormControl({value: '', disabled: true}),
+      proyectoVsTotal: new FormControl({value: '', disabled: true}),
+      incidencia_dias : new FormControl({value: '', disabled: true}),
+      incidencia_porcentaje: new FormControl({value: '', disabled: true}),
+      incidenciaVsTotal: new FormControl({value: '', disabled: true})
     })
     //Obtenemos el id del usuario desde la url
     activatedroute.params.subscribe(params => {

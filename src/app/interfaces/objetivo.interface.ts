@@ -1,5 +1,7 @@
 import { TipoUsuario } from './usuario.interface';
 import { TipoIncidencia } from './incidencia.interface';
+import { TipoLog } from './log.interface';
+
 
 
 
@@ -51,6 +53,18 @@ export interface TipoRespuestaDatosUsuario {
   datos?: TipoDatosUsuario
 }
 
+export interface TipoObjetivoCompleto {
+  objetivo: TipoObjetivo,
+  incidencias: TipoIncidencia[],
+  logs: TipoLog[]
+}
+
+export interface TipoRespuestaObjetivoCompleto {
+  ok: boolean,
+  errBaseDatos?: boolean,
+  err?: string,
+  objetivoCompleto?: TipoObjetivoCompleto
+}
 
 // usuario: {
 //   type: Schema.Types.ObjectId,

@@ -29,7 +29,7 @@ export class NuevoObjetivoComponent implements OnInit {
       nombre: new FormControl('', [Validators.minLength(3), Validators.required]),
       fechaInicio: new FormControl('1/1/2019', [this.validar_fecha, Validators.pattern('([0-9]+)/([0-9]+)/([0-9]+)')]),
       fechaFin: new FormControl('1/1/2019', [this.validar_fecha, Validators.pattern('([0-9]+)/([0-9]+)/([0-9]+)')]),
-      conseguido: new FormControl('0')
+      conseguido: new FormControl({value: '0', disabled: true})
     })
     activatedroute.params.subscribe(params => {
       this.idUsuario = params.idUsuario;

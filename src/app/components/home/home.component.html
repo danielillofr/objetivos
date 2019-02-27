@@ -15,25 +15,25 @@
                     <label for="planificado_dias">
                       Dias
                     </label>
-                    <input disabled="true" class="form-control" formControlName="planificado_dias" type="text" id="planificado_dias">
+                    <input class="form-control" formControlName="planificado_dias" type="text" id="planificado_dias">
                 </div>
                 <div class="col-md-2">
                     <label for="planificado_porcentaje">
                       Porcentaje/Año
                     </label>
-                    <input disabled="true" class="form-control" formControlName="planificado_porcentaje" type="text" id="planificado_porcentaje">
+                    <input class="form-control" formControlName="planificado_porcentaje" type="text" id="planificado_porcentaje">
                 </div>
                 <div class="col-md-1">
                     <label for="porcentaje_total">
                       Conseguido
                     </label>
-                    <input disabled="true" class="form-control" formControlName="porcentaje_total" type="text" id="porcentaje_total">
+                    <input class="form-control" formControlName="porcentaje_total" type="text" id="porcentaje_total">
                 </div>
                 <div class="col-md-2">
                     <label for="fechaPlan">
                       Fecha fin planificación
                     </label>
-                    <input disabled="true" class="form-control" formControlName="fechaPlan" type="text" id="fechaPlan">
+                    <input class="form-control" formControlName="fechaPlan" type="text" id="fechaPlan">
                 </div>
             </div>
         </div>
@@ -47,25 +47,25 @@
                     <label for="proyecto_dias">
                   Dias
                 </label>
-                    <input disabled="true" class="form-control" formControlName="proyecto_dias" type="text" id="proyecto_dias">
+                    <input class="form-control" formControlName="proyecto_dias" type="text" id="proyecto_dias">
                 </div>
                 <div class="col-md-2">
                     <label for="proyecto_porcentaje">
                   Porcentaje/Año
                 </label>
-                    <input disabled="true" class="form-control" formControlName="proyecto_porcentaje" type="text" id="proyecto_porcentaje">
+                    <input class="form-control" formControlName="proyecto_porcentaje" type="text" id="proyecto_porcentaje">
                 </div>
                 <div class="col-md-1">
                     <label for="porcentaje_conseguido">
                       Conseguido
                     </label>
-                    <input disabled="true" class="form-control" formControlName="porcentaje_conseguido" type="text" id="porcentaje_conseguido">
+                    <input class="form-control" formControlName="porcentaje_conseguido" type="text" id="porcentaje_conseguido">
                 </div>
                 <div class="col-md-2">
                     <label for="proyectoVsTotal">
                   Dedicación proyectos
                 </label>
-                    <input disabled="true" class="form-control" formControlName="proyectoVsTotal" type="text" id="proyectoVsTotal">
+                    <input class="form-control" formControlName="proyectoVsTotal" type="text" id="proyectoVsTotal">
                 </div>
             </div>
         </div>
@@ -79,25 +79,25 @@
                     <label for="incidencia_dias">
                   Dias
                 </label>
-                    <input disabled="true" class="form-control" formControlName="incidencia_dias" type="text" id="incidencia_dias">
+                    <input class="form-control" formControlName="incidencia_dias" type="text" id="incidencia_dias">
                 </div>
                 <div class="col-md-2">
                     <label for="incidencia_porcentaje">
                   Porcentaje/Año
                 </label>
-                    <input disabled="true" class="form-control" formControlName="incidencia_porcentaje" type="text" id="incidencia_porcentaje">
+                    <input class="form-control" formControlName="incidencia_porcentaje" type="text" id="incidencia_porcentaje">
                 </div>
                 <div class="col-md-1">
                     <label for="incidencia_porcentaje">
                       Conseguido
                     </label>
-                    <input disabled="true" class="form-control" formControlName="incidencia_porcentaje" type="text" id="incidencia_porcentaje">
+                    <input class="form-control" formControlName="incidencia_porcentaje" type="text" id="incidencia_porcentaje">
                 </div>
                 <div class="col-md-2">
                     <label for="incidenciaVsTotal">
                   Dedicación incidencias
                 </label>
-                    <input disabled="true" class="form-control" formControlName="incidenciaVsTotal" type="text" id="incidenciaVsTotal">
+                    <input class="form-control" formControlName="incidenciaVsTotal" type="text" id="incidenciaVsTotal">
                 </div>
             </div>
         </div>
@@ -122,11 +122,12 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let objetivo of datosUsuario.objetivos">
-                        <td>{{objetivo.nombre}}</td>
+                        <td>
+                            <a [routerLink]="['/modObjetivo',idUsuario,objetivo._id]" routerLinkActive="router-link-active"> {{objetivo.nombre}}</a></td>
                         <td>{{objetivo.fechaInicio | fechaAFormato }}</td>
                         <td>{{objetivo.fechaFin | fechaAFormato}}</td>
                         <td>{{objetivo.diasProyecto}}</td>
-                        <td>{{objetivo.diasProyecto | labAPor}}</td>
+                        <td>{{objetivo.diasProyecto | labAPor}}%</td>
                         <td>{{objetivo.conseguido}}%</td>
                         <td>{{objetivo.conseguido | conAPor:objetivo.diasProyecto}}%</td>
                     </tr>

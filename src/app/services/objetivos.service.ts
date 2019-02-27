@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApihttpService } from './apihttp.service';
 import { TipoRespuestaDatosUsuario } from './../interfaces/objetivo.interface';
-import { TipoObjetivo, TipoRespuestaObjetivo } from '../interfaces/objetivo.interface';
+import { TipoObjetivo, TipoRespuestaObjetivo, TipoRespuestaObjetivoCompleto } from '../interfaces/objetivo.interface';
 
 
 
@@ -58,4 +58,24 @@ export class ObjetivosService {
     })
   }
 
+  Obtener_objetivo_completo = (idObjetivo) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.apihttpservice.token
+      })
+    };
+    return new Promise((resolve,reject) => {
+      this.http.get<TipoRespuestaObjetivoCompleto>(`${this.env}/api/objetivos/completo/${idObjetivo}`,opciones)
+        .subscribe(respuesta => {
+          if (!respuesta.ok){
+            console.log('Error obteniendo el objetivo:', respuesta);
+            reject('Error obteniendo el objetivo');
+          }
+          resolve(respuesta.objetivoCompleto);
+        }, err => {
+          console.log('Error accediendo a la base de datos:', err);
+          reject('Error accediendo a la base de datos');
+        })
+    })    
+  }
 }
