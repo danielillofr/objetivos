@@ -17,6 +17,7 @@ import { LabAPorPipe } from './pipes/lab-apor.pipe';
 import { ConAPorPipe } from './pipes/con-apor.pipe';
 import { NuevoObjetivoComponent } from './components/nuevo-objetivo/nuevo-objetivo.component';
 import { ModobjetivoComponent } from './components/modobjetivo/modobjetivo.component';
+import { NuevaIncidenciaComponent } from './components/nueva-incidencia/nueva-incidencia.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ModobjetivoComponent } from './components/modobjetivo/modobjetivo.compo
     LabAPorPipe,
     ConAPorPipe,
     NuevoObjetivoComponent,
-    ModobjetivoComponent
+    ModobjetivoComponent,
+    NuevaIncidenciaComponent
   ],
   imports: [
     BrowserModule,

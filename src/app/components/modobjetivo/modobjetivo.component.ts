@@ -45,11 +45,10 @@ export class ModobjetivoComponent implements OnInit {
 
     activatedroute.params.subscribe(params => {
       this.idObjetivo = params.idObjetivo;
-      this.idUsuario = params.idUsuario;
       objetivosservice.Obtener_objetivo_completo(this.idObjetivo)
         .then(respuesta => {
-          console.log('Respuesta:', respuesta);
           this.objetivoCompleto = <TipoObjetivoCompleto>respuesta;
+          this.idUsuario = this.objetivoCompleto.objetivo.usuario;
           this.formularioObjetivo.controls['nombre'].setValue(this.objetivoCompleto.objetivo.nombre);
 
           this.formularioObjetivo.controls['fechaInicio'].setValue(this.Formatear_fecha(this.objetivoCompleto.objetivo.fechaInicio));
@@ -126,7 +125,6 @@ export class ModobjetivoComponent implements OnInit {
   Cerrar_objetivo = () => {
     this.objetivosservice.Cerrar_objetivo(this.idObjetivo)
       .then(respuesta => {
-        console.log(respuesta);
         const objetivoRespuesta = <TipoObjetivo>respuesta;
         alert(`Objetivo cerrado, nueva fecha de fin:${this.Formatear_fecha(objetivoRespuesta.fechaFin)}`)
         this.router.navigate(['home',this.idUsuario]);
@@ -139,7 +137,6 @@ export class ModobjetivoComponent implements OnInit {
   Cancelar_objetivo = () => {
     this.objetivosservice.Cancelar_objetivo(this.idObjetivo)
       .then(respuesta => {
-        console.log(respuesta);
         const objetivoRespuesta = <TipoObjetivo>respuesta;
         alert(`Objetivo cerrado, nueva fecha de fin:${this.Formatear_fecha(objetivoRespuesta.fechaFin)}`)
         this.router.navigate(['home',this.idUsuario]);

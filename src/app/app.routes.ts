@@ -5,6 +5,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { NuevoObjetivoComponent } from './components/nuevo-objetivo/nuevo-objetivo.component';
 import { ModobjetivoComponent } from './components/modobjetivo/modobjetivo.component';
+import { NuevaIncidenciaComponent } from './components/nueva-incidencia/nueva-incidencia.component';
+
 
 
 
@@ -14,7 +16,8 @@ const routes: Routes = [
   { path: 'home/:idUsuario', component: HomeComponent },
   { path: 'listusers', component: ListUsersComponent },
   { path: 'nuevoObjetivo/:idUsuario', component: NuevoObjetivoComponent },
-  { path: 'modObjetivo/:idUsuario/:idObjetivo', component: ModobjetivoComponent },
+  { path: 'modObjetivo/:idObjetivo', component: ModobjetivoComponent },
+  { path: 'nuevaIncidencia/:idObjetivo', component: NuevaIncidenciaComponent },
   { path: '**', component: LoginComponent },
 
 ];

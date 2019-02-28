@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApihttpService } from './apihttp.service';
 import { TipoRespuestaDatosUsuario } from './../interfaces/objetivo.interface';
-import { TipoObjetivo, TipoRespuestaObjetivo, TipoRespuestaObjetivoCompleto } from '../interfaces/objetivo.interface';
-import { reject } from 'q';
-import { resolve } from 'url';
+import { TipoRespuestaObjetivo, TipoRespuestaObjetivoCompleto } from '../interfaces/objetivo.interface';
+import { TipoRespuestaIncidencia } from './../interfaces/incidencia.interface';
 
 
 
@@ -162,5 +161,28 @@ export class ObjetivosService {
         }));
     });
   }
+
+  Crear_incidencia = (incidencia) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.apihttpservice.token
+      })
+    };
+    return new Promise ((resolve,reject) => {
+      this.http.post<TipoRespuestaIncidencia>(`${this.env}/api/incidencias`,incidencia,opciones)
+        .subscribe(respuesta => {
+          if (!respuesta.ok) {
+            console.log('Error creando la incidencia:', respuesta);
+            reject('Error creando la incidencia')
+          }
+          resolve(respuesta.incidencia);
+        },(err=> {
+          console.log('Error accediendo a base de datos');
+          reject('Error accediendo a base de datos');
+        }))
+    })
+  }
+
+
 
 }

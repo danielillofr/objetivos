@@ -48,12 +48,16 @@
     <br>
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <button class="btn btn-block btn-success" (click)="Cerrar_objetivo()">Cerrar proyecto</button>
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-3">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
             <button class="btn btn-block btn-success" (click)="Cancelar_objetivo()">Cancelar proyecto</button>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            <button class="btn btn-block btn-danger" [routerLink]="['/home', idUsuario]" routerLinkActive="router-link-active">Volver</button>
         </div>
     </div>
     <hr>
@@ -80,6 +84,12 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-2" style="text-align:center">
+            <button class="btn btn-block btn-success" [routerLink]="['/nuevaIncidencia', idObjetivo]" routerLinkActive="router-link-active">Nueva incidencia</button>
         </div>
     </div>
     <hr>

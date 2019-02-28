@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <h2>Nueva incidencia</h2>
+    <form [formGroup]="formularioIncidencia">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="text-align: center">
+                    <label for="motivo">
+                    Motivo
+                  </label>
+                    <input type="text" class="form-control" formControlName="motivo" id="motivo" [ngClass]="{'is-invalid': formularioIncidencia.controls['motivo'].errors}">
+                    <small *ngIf="formularioIncidencia.controls['motivo'].errors">Mínimo tres caracteres</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <label for="dias">
+            Días
+          </label>
+                    <input type="text" class="form-control" formControlName="dias" id="dias" [ngClass]="{'is-invalid': formularioIncidencia.controls['dias'].errors}">
+                    <small *ngIf="formularioIncidencia.controls['dias'].errors">Valor (0-261)</small>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <button class="btn btn-block btn-success" (click)="Crear_incidencia()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

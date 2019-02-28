@@ -60,6 +60,9 @@ export class HomeComponent implements OnInit {
         this.formularioUsuario.controls['porcentaje_conseguido'].setValue(`${this.datosUsuario.datos.porcentajeConseguido}%`)
         let porcentajeTotal: number = <number>this.datosUsuario.datos.porcentajeConseguido;
         porcentajeTotal += <number>this.datosUsuario.datos.incidencias.porcentaje;
+        porcentajeTotal = porcentajeTotal * 10;
+        porcentajeTotal = Math.round(porcentajeTotal);
+        porcentajeTotal = porcentajeTotal / 10;
         this.formularioUsuario.controls['porcentaje_total'].setValue(`${porcentajeTotal}%`)
         //Proyecto
         this.formularioUsuario.controls['proyecto_dias'].setValue(this.datosUsuario.datos.proyecto.dias);
