@@ -25,7 +25,6 @@ export class ListUsersComponent implements OnInit {
     apihttpservice.Obtener_usuarios_de_aprobador()
       .then(usuarios => {
         this.usuarios = <TipoUsuario[]>usuarios;
-        console.log(this.usuarios);
       })
   }
 

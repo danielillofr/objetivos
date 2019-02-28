@@ -19,6 +19,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class ModobjetivoComponent implements OnInit {
   objetivoCompleto: TipoObjetivoCompleto = null;
   formularioObjetivo: FormGroup;
+  idObjetivo: String;
+  idUsuario: String;
   constructor(private apihttpservice: ApihttpService,
               private objetivosservice: ObjetivosService,
               private activatedroute: ActivatedRoute,
@@ -31,17 +33,27 @@ export class ModobjetivoComponent implements OnInit {
       nombre: new FormControl({value: '', disabled: true}),
       fechaInicio: new FormControl({value: '', disabled: true}),
       fechaFin: new FormControl('', [this.validar_fecha, Validators.pattern('([0-9]+)/([0-9]+)/([0-9]+)')]),
-      conseguido: new FormControl('')
+      conseguido: new FormControl('', [Validators.required, Validators.pattern('([0-9]+)'), this.Validar_conseguido])
     })
 
+
+    // this.formularioObjetivo.statusChanges.subscribe(status=>{
+    //   console.log('Estatus:', status);
+    //   console.log(this.formularioObjetivo);
+
+    // })
+
     activatedroute.params.subscribe(params => {
-      objetivosservice.Obtener_objetivo_completo(params.idObjetivo)
+      this.idObjetivo = params.idObjetivo;
+      this.idUsuario = params.idUsuario;
+      objetivosservice.Obtener_objetivo_completo(this.idObjetivo)
         .then(respuesta => {
+          console.log('Respuesta:', respuesta);
           this.objetivoCompleto = <TipoObjetivoCompleto>respuesta;
-          console.log(this.objetivoCompleto);
           this.formularioObjetivo.controls['nombre'].setValue(this.objetivoCompleto.objetivo.nombre);
-          this.formularioObjetivo.controls['fechaInicio'].setValue(this.objetivoCompleto.objetivo.fechaInicio);
-          this.formularioObjetivo.controls['fechaFin'].setValue(this.objetivoCompleto.objetivo.fechaFin);
+
+          this.formularioObjetivo.controls['fechaInicio'].setValue(this.Formatear_fecha(this.objetivoCompleto.objetivo.fechaInicio));
+          this.formularioObjetivo.controls['fechaFin'].setValue(this.Formatear_fecha(this.objetivoCompleto.objetivo.fechaFin));
           this.formularioObjetivo.controls['conseguido'].setValue(this.objetivoCompleto.objetivo.conseguido);
         })
         .catch(err => {
@@ -57,7 +69,6 @@ export class ModobjetivoComponent implements OnInit {
   }
   validar_fecha = (c: FormControl) => {
     let cadena:string = c.value;
-    console.log(cadena);
     const partes = cadena.split('/');
     if (partes.length < 3) {
       return {
@@ -78,6 +89,76 @@ export class ModobjetivoComponent implements OnInit {
     }
     return null;
 
+  }
+
+  Validar_conseguido = (c: FormControl) => {
+    const numero = Number(c.value);
+    if ((numero < 0) || (numero > 100)) {
+      return {
+        validateConseguido: {
+          valid: false
+        }
+      }
+    }
+    return null;
+  }
+
+  Formatear_fecha = (fechaIn: Date) => {
+    let fecha = new Date();
+    fecha.setTime(Date.parse(fechaIn.toString()));
+    let fechaString = fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear();
+    return fechaString;
+
+  }
+
+  Modificar_conseguido = () => {
+    const conseguido = this.formularioObjetivo.controls['conseguido'].value;
+    this.objetivosservice.Modificar_conseguido(this.idObjetivo, conseguido)
+      .then(respuesta => {
+        alert(`Conseguido modificado correctamente a ${conseguido}%`);
+        this.router.navigate(['/home', this.idUsuario]);
+      })
+      .catch(err => {
+        alert(err)
+      })
+  }
+
+  Cerrar_objetivo = () => {
+    this.objetivosservice.Cerrar_objetivo(this.idObjetivo)
+      .then(respuesta => {
+        console.log(respuesta);
+        const objetivoRespuesta = <TipoObjetivo>respuesta;
+        alert(`Objetivo cerrado, nueva fecha de fin:${this.Formatear_fecha(objetivoRespuesta.fechaFin)}`)
+        this.router.navigate(['home',this.idUsuario]);
+      })
+      .catch(err => {
+        alert(err)
+      })
+  }
+
+  Cancelar_objetivo = () => {
+    this.objetivosservice.Cancelar_objetivo(this.idObjetivo)
+      .then(respuesta => {
+        console.log(respuesta);
+        const objetivoRespuesta = <TipoObjetivo>respuesta;
+        alert(`Objetivo cerrado, nueva fecha de fin:${this.Formatear_fecha(objetivoRespuesta.fechaFin)}`)
+        this.router.navigate(['home',this.idUsuario]);
+      })
+      .catch(err => {
+        alert(err)
+      })
+  }
+
+  Replanificar_objetivo = () => {
+    this.objetivosservice.Replanificar_objetivo(this.idObjetivo, this.Intercambiar_fecha(this.formularioObjetivo.controls['fechaFin'].value))
+      .then(respuesta => {
+        const objetivoRespuesta = <TipoObjetivo>respuesta;
+        alert(`Objetivo replanificado, nueva fecha de fin:${this.Formatear_fecha(objetivoRespuesta.fechaFin)}`)
+        this.router.navigate(['home',this.idUsuario]);
+      })
+      .catch(err => {
+        alert(err)
+      })
   }
 
   ngOnInit() {

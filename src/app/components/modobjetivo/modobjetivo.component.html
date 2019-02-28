@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="objetivoCompleto">
     <h2>Detalle del objetivo</h2>
     <form [formGroup]="formularioObjetivo">
         <div class="form-group">
@@ -22,7 +22,6 @@
                     <input type="text" class="form-control" formControlName="fechaInicio" id="fechaInicio" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaInicio'].errors}">
                     <small *ngIf="formularioObjetivo.controls['fechaInicio'].errors">Fecha inválida</small>
                 </div>
-                <div class="col-md-1"></div>
                 <div class="col-md-2" style="text-align: center">
                     <label for="fechaFin">
                       Fecha fin
@@ -30,14 +29,91 @@
                     <input type="text" class="form-control" formControlName="fechaFin" id="fechaFin" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaFin'].errors}">
                     <small *ngIf="formularioObjetivo.controls['fechaFin'].errors">Fecha inválida</small>
                 </div>
-                <div class="col-md-1"></div>
+                <div class="col-md-1">
+                    <button class="btn btn-block btn-success" style="position: relative; height: 50%; top: 50%" (click)="Replanificar_objetivo()">Cambiar</button>
+                </div>
                 <div class="col-md-2" style="text-align: center">
                     <label for="conseguido">
-                      Conseguido
+                      Conseguido(%)
                   </label>
-                    <input type="text" class="form-control" formControlName="conseguido" id="conseguido">
+                    <input type="text" class="form-control" formControlName="conseguido" id="conseguido" [ngClass]="{'is-invalid': formularioObjetivo.controls['conseguido'].errors}">
+                    <small *ngIf="formularioObjetivo.controls['conseguido'].errors">Conseguido (0-100)</small>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-block btn-success" style="position: relative; height: 50%; top: 50%" (click)="Modificar_conseguido()">Evaluar</button>
                 </div>
             </div>
         </div>
     </form>
+    <br>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <button class="btn btn-block btn-success" (click)="Cerrar_objetivo()">Cerrar proyecto</button>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <button class="btn btn-block btn-success" (click)="Cancelar_objetivo()">Cancelar proyecto</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Incidencias del objetivo</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr class="table-dark">
+                        <td>#</td>
+                        <td>Motivo</td>
+                        <td>Dias</td>
+                    </tr>
+                </thead>
+                <tbody class="table-bordered">
+                    <tr *ngFor="let incidencia of objetivoCompleto.incidencias; let i=index">
+                        <td>{{i}}</td>
+                        <td>{{incidencia.motivo}}</td>
+                        <td>{{incidencia.dias}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Logs del objetivo</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr class="table-dark">
+                        <td>#</td>
+                        <td>Usuario</td>
+                        <td>Fecha</td>
+                        <td>Motivo</td>
+                        <td>Fecha fin</td>
+                        <td>Dias</td>
+                        <td>Porcentaje</td>
+                    </tr>
+                </thead>
+                <tbody class="table-bordered">
+                    <tr *ngFor="let log of objetivoCompleto.logs;let i=index">
+                        <td>{{i}}</td>
+                        <td>{{log.nombreUsuario}}</td>
+                        <td>{{log.fechaLog | fechaAFormato}}</td>
+                        <td>{{log.motivo}}</td>
+                        <td>{{log.fechaFin | fechaAFormato}}</td>
+                        <td>{{log.dias}}</td>
+                        <td>{{log.diasProyecto | labAPor}}%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApihttpService } from './apihttp.service';
 import { TipoRespuestaDatosUsuario } from './../interfaces/objetivo.interface';
 import { TipoObjetivo, TipoRespuestaObjetivo, TipoRespuestaObjetivoCompleto } from '../interfaces/objetivo.interface';
+import { reject } from 'q';
+import { resolve } from 'url';
 
 
 
@@ -28,7 +30,6 @@ export class ObjetivosService {
             console.log('Error obteniendo los datos del usuario', respuesta);
             reject ('Error obteniendo los datos del usuario');
           }
-          console.log(respuesta);
           resolve(respuesta.datos);
         }, err => {
           console.log('Error accediendo a la base de datos:', err);
@@ -76,6 +77,90 @@ export class ObjetivosService {
           console.log('Error accediendo a la base de datos:', err);
           reject('Error accediendo a la base de datos');
         })
-    })    
+    })
   }
+
+  Modificar_conseguido = (idObjetivo, conseguido) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.apihttpservice.token
+      })
+    };
+    return new Promise((resolve,reject) => {
+      this.http.put<TipoRespuestaObjetivo>(`${this.env}/api/objetivos/${idObjetivo}`,{conseguido},opciones)
+        .subscribe(respuesta => {
+          if (!respuesta.ok) {
+            console.log('Error modificando objetivo:', respuesta);
+            reject('Error modificando objetivo');
+          }
+          resolve(respuesta.objetivo);
+        }, (err => {
+          console.log('Error conectando con base de datos:', err);
+          reject('Error conectando con base de datos');
+        }));
+    });
+  }
+  Cerrar_objetivo = (idObjetivo) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.apihttpservice.token
+      })
+    };
+    return new Promise((resolve,reject) => {
+      this.http.post<TipoRespuestaObjetivo>(`${this.env}/api/objetivos/cerrar/${idObjetivo}`,{},opciones)
+        .subscribe(respuesta => {
+          if (!respuesta.ok) {
+            console.log('Error cerrando objetivo:', respuesta);
+            reject('Error cerrando objetivo');
+          }
+          resolve(respuesta.objetivo);
+        }, (err => {
+          console.log('Error accediendo a base de datos');
+          reject('Error accediendo a base de datos');
+        }));
+    });
+  }
+
+  Cancelar_objetivo = (idObjetivo) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.apihttpservice.token
+      })
+    };
+    return new Promise((resolve,reject) => {
+      this.http.post<TipoRespuestaObjetivo>(`${this.env}/api/objetivos/cancelar/${idObjetivo}`,{},opciones)
+        .subscribe(respuesta => {
+          if (!respuesta.ok) {
+            console.log('Error cancelando objetivo:', respuesta);
+            reject('Error cancelando objetivo');
+          }
+          resolve(respuesta.objetivo);
+        }, (err => {
+          console.log('Error accediendo a base de datos');
+          reject('Error accediendo a base de datos');
+        }));
+    });
+  }
+
+  Replanificar_objetivo = (idObjetivo, fechaFin) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.apihttpservice.token
+      })
+    };
+    return new Promise((resolve,reject) => {
+      this.http.post<TipoRespuestaObjetivo>(`${this.env}/api/objetivos/replanificar/${idObjetivo}`,{fechaFin},opciones)
+        .subscribe(respuesta => {
+          if (!respuesta.ok) {
+            console.log('Error replanificando objetivo:', respuesta);
+            reject('Error replanificando objetivo');
+          }
+          resolve(respuesta.objetivo);
+        }, (err => {
+          console.log('Error accediendo a base de datos');
+          reject('Error accediendo a base de datos');
+        }));
+    });
+  }
+
 }

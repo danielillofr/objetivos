@@ -33,7 +33,6 @@ export class NuevoObjetivoComponent implements OnInit {
     })
     activatedroute.params.subscribe(params => {
       this.idUsuario = params.idUsuario;
-      console.log('New goal for:', this.idUsuario);
       // let a: string = '2/5/2010';
       // let b = a.split('/');
       // console.log(b);
@@ -51,8 +50,9 @@ export class NuevoObjetivoComponent implements OnInit {
       return fechaBD;
     }
 
+
+
    Crear_objetivo = () => {
-     console.log('Creando objetivo');
      if (this.formularioObjetivo.invalid) {
        alert('Hay errores en el formulario');
        return;
@@ -65,7 +65,6 @@ export class NuevoObjetivoComponent implements OnInit {
     }
     this.objetivoservice.Crear_objetivo(objetivoCrear)
       .then(resultado => {
-        console.log('Objetivo creado');
         this.router.navigate(['/home', this.idUsuario]);
       })
       .catch(err => {
@@ -75,7 +74,6 @@ export class NuevoObjetivoComponent implements OnInit {
 
    validar_fecha = (c: FormControl) => {
      let cadena:string = c.value;
-     console.log(cadena);
      const partes = cadena.split('/');
      if (partes.length < 3) {
        return {

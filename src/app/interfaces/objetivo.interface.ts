@@ -7,19 +7,21 @@ import { TipoLog } from './log.interface';
 
 export interface TipoObjetivo {
   usuario: String,
+  _id: String,
   nombre: String,
   fechaInicio: Date,
   fechaFin: Date,
   conseguido: Number,
   diasLaborables: Number,
-  diasProyecto: Number
+  diasProyecto: Number,
+  estado: String
 }
 
 export interface TipoRespuestaObjetivo {
   ok: boolean,
   errBaseDatos?: boolean,
   err?: string,
-  objetivo: TipoObjetivo
+  objetivo?: TipoObjetivo
 }
 
 export interface TipoDatosUsuario {

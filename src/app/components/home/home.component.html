@@ -112,20 +112,24 @@
                 <thead>
                     <tr class="table-dark">
                         <td>Nombre</td>
+                        <td>Estado</td>
                         <td>Fecha inicio</td>
                         <td>Fecha fin</td>
+                        <td>Días reales</td>
                         <td>Días proyecto</td>
                         <td>Porcentaje</td>
                         <td>Evaluado</td>
                         <td>Obtenido</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-bordered">
                     <tr *ngFor="let objetivo of datosUsuario.objetivos">
                         <td>
                             <a [routerLink]="['/modObjetivo',idUsuario,objetivo._id]" routerLinkActive="router-link-active"> {{objetivo.nombre}}</a></td>
+                        <td>{{objetivo.estado }}</td>
                         <td>{{objetivo.fechaInicio | fechaAFormato }}</td>
                         <td>{{objetivo.fechaFin | fechaAFormato}}</td>
+                        <td>{{objetivo.diasLaborables}}</td>
                         <td>{{objetivo.diasProyecto}}</td>
                         <td>{{objetivo.diasProyecto | labAPor}}%</td>
                         <td>{{objetivo.conseguido}}%</td>
@@ -157,12 +161,12 @@
                         <td>Porcentaje</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-bordered">
                     <tr *ngFor="let incidencia of datosUsuario.incidencias">
 
                         <td>{{incidencia.motivo}}</td>
                         <td>{{incidencia.dias}}</td>
-                        <td>{{incidencia.dias | labAPor}}</td>
+                        <td>{{incidencia.dias | labAPor}}%</td>
                     </tr>
                 </tbody>
             </table>

@@ -35,8 +35,6 @@ export class LoginComponent implements OnInit {
       }
       this.apihttp.token = data.token;
       this.apihttp.logueado = true;
-      console.log('Datos:', data);
-      console.log('Token', data.token);
       this.apihttp.usuarioApp = <TipoUsuario>data.usuario;
       this.router.navigate(['listusers']);
     }, (err) => {

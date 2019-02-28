@@ -7,5 +7,6 @@ export interface TipoLog {
     _id: string,
     usuario: string,
     objetivo: string,
+    diasProyecto: number,
     fechaLog: string
 }
