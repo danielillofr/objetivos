@@ -4,6 +4,7 @@ import { ApihttpService } from './apihttp.service';
 import { TipoRespuestaDatosUsuario } from './../interfaces/objetivo.interface';
 import { TipoRespuestaObjetivo, TipoRespuestaObjetivoCompleto } from '../interfaces/objetivo.interface';
 import { TipoRespuestaIncidencia } from './../interfaces/incidencia.interface';
+import { environment } from './../../environments/environment';
 
 
 
@@ -11,8 +12,8 @@ import { TipoRespuestaIncidencia } from './../interfaces/incidencia.interface';
   providedIn: 'root'
 })
 export class ObjetivosService {
-  env: String = 'http://localhost:3000';
-
+  // env: String = 'http://localhost:3000';
+  env: String = environment.ruta_backend;
   constructor(private apihttpservice: ApihttpService, private http: HttpClient) { }
 
   Obtener_datos_usuario = (idUsuario) => {
