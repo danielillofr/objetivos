@@ -4,6 +4,7 @@ import { TipoDatosUsuario, TipoObjetivo } from './../../interfaces/objetivo.inte
 import { ObjetivosService } from './../../services/objetivos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TipoUsuario } from '../../interfaces/usuario.interface';
 
 
 
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   titulo: String = '';
   idUsuario: String;
   datosUsuario: TipoDatosUsuario = null;
+  usuarioApp: TipoUsuario;
   constructor(private apihttpservice: ApihttpService,
               private objetivosservice: ObjetivosService,
               private activatedroute: ActivatedRoute, private router: Router) {
@@ -27,6 +29,7 @@ export class HomeComponent implements OnInit {
       router.navigate(['/']);
       return;
     }
+    this.usuarioApp = apihttpservice.usuarioApp;
     //Creamos el formulario con todos los campos
     this.formularioUsuario = new FormGroup({
       planificado_dias: new FormControl({value:'', disabled: true}),

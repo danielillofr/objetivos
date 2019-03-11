@@ -139,7 +139,7 @@
             </table>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="usuarioApp.role != 'INGENIERO'">
         <div class="col-md-5"></div>
         <div class="col-md-2" style="text-align:center">
             <button class="btn btn-block btn-success" [routerLink]="['/nuevoObjetivo', idUsuario]" routerLinkActive="router-link-active">

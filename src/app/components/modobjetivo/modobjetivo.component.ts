@@ -6,6 +6,7 @@ import { ObjetivosService } from './../../services/objetivos.service';
 import { ApihttpService } from './../../services/apihttp.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TipoUsuario } from '../../interfaces/usuario.interface';
 
 
 
@@ -21,6 +22,7 @@ export class ModobjetivoComponent implements OnInit {
   formularioObjetivo: FormGroup;
   idObjetivo: String;
   idUsuario: String;
+  usuarioNoIngeniero: Boolean;
   constructor(private apihttpservice: ApihttpService,
               private objetivosservice: ObjetivosService,
               private activatedroute: ActivatedRoute,
@@ -28,7 +30,7 @@ export class ModobjetivoComponent implements OnInit {
     if (!apihttpservice.logueado) {
       router.navigate(['/']);
     }
-
+    this.usuarioNoIngeniero = (apihttpservice.usuarioApp.role != 'INGENIERO');
     this.formularioObjetivo = new FormGroup ({
       nombre: new FormControl({value: '', disabled: true}),
       fechaInicio: new FormControl({value: '', disabled: true}),

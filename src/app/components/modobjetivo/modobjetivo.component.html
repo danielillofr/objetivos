@@ -29,7 +29,7 @@
                     <input type="text" class="form-control" formControlName="fechaFin" id="fechaFin" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaFin'].errors}">
                     <small *ngIf="formularioObjetivo.controls['fechaFin'].errors">Fecha inválida</small>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-1" *ngIf="usuarioNoIngeniero">
                     <button class="btn btn-block btn-success" style="position: relative; height: 50%; top: 50%" (click)="Replanificar_objetivo()">Cambiar</button>
                 </div>
                 <div class="col-md-2" style="text-align: center">
@@ -40,7 +40,7 @@
                     <small *ngIf="formularioObjetivo.controls['conseguido'].errors">Conseguido (0-100)</small>
                 </div>
                 <div class="col-md-1">
-                    <button class="btn btn-block btn-success" style="position: relative; height: 50%; top: 50%" (click)="Modificar_conseguido()">Evaluar</button>
+                    <button *ngIf="usuarioNoIngeniero" class="btn btn-block btn-success" style="position: relative; height: 50%; top: 50%" (click)="Modificar_conseguido()">Evaluar</button>
                 </div>
             </div>
         </div>
@@ -48,11 +48,11 @@
     <br>
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-2">
+        <div class="col-md-2" *ngIf="usuarioNoIngeniero">
             <button class="btn btn-block btn-success" (click)="Cerrar_objetivo()">Cerrar proyecto</button>
         </div>
         <div class="col-md-1"></div>
-        <div class="col-md-2">
+        <div class="col-md-2" *ngIf="usuarioNoIngeniero">
             <button class="btn btn-block btn-success" (click)="Cancelar_objetivo()">Cancelar proyecto</button>
         </div>
         <div class="col-md-1"></div>
