@@ -148,6 +148,17 @@ export class ModobjetivoComponent implements OnInit {
       })
   }
 
+  Terminar_objetivo = () => {
+    this.objetivosservice.Terminar_objetivo(this.idObjetivo)
+      .then(respuesta => {
+        const objetivoRespuesta = <TipoObjetivo>respuesta;
+        alert('Objetivo terminado correctamente');
+        this.router.navigate(['home',this.idUsuario]);
+      })
+      .catch(err => {
+        alert(err)
+      })
+  }
   Replanificar_objetivo = () => {
     this.objetivosservice.Replanificar_objetivo(this.idObjetivo, this.Intercambiar_fecha(this.formularioObjetivo.controls['fechaFin'].value))
       .then(respuesta => {

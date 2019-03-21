@@ -142,6 +142,27 @@ export class ObjetivosService {
     });
   }
 
+  Terminar_objetivo = (idObjetivo) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.apihttpservice.token
+      })
+    };
+    return new Promise((resolve,reject) => {
+      this.http.post<TipoRespuestaObjetivo>(`${this.env}/api/objetivos/terminar/${idObjetivo}`,{},opciones)
+        .subscribe(respuesta => {
+          if (!respuesta.ok) {
+            console.log('Error terminando objetivo:', respuesta);
+            reject('Error terminando objetivo');
+          }
+          resolve(respuesta.objetivo);
+        }, (err => {
+          console.log('Error accediendo a base de datos');
+          reject('Error accediendo a base de datos');
+        }));
+    });
+  }
+
   Replanificar_objetivo = (idObjetivo, fechaFin) => {
     const opciones = {
       headers: new HttpHeaders ({

@@ -56,6 +56,13 @@
             <button class="btn btn-block btn-success" (click)="Cancelar_objetivo()">Cancelar proyecto</button>
         </div>
         <div class="col-md-1"></div>
+        <div class="col-md-2" *ngIf="usuarioNoIngeniero">
+            <button class="btn btn-block btn-success" (click)="Terminar_objetivo()">Terminar proyecto</button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-5"></div>
         <div class="col-md-2">
             <button class="btn btn-block btn-danger" [routerLink]="['/home', idUsuario]" routerLinkActive="router-link-active">Volver</button>
         </div>
