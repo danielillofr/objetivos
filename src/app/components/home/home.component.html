@@ -173,4 +173,16 @@
         </div>
     </div>
     <hr>
+    <div class="row" *ngIf="usuarioApp.role != 'INGENIERO'">
+        <div class="col-md-5"></div>
+        <div class="col-md-2" style="text-align:center">
+            <a href="/api/usuarios/imprimir/{{idUsuario}}">
+            <button class="btn btn-block btn-success">
+          Imprimir informe
+            </button>
+        </a>
+        </div>
+    </div>
+    <br>
+
 </div>
