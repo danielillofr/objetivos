@@ -21,6 +21,14 @@
                     <input type="text" class="form-control" formControlName="dias" id="dias" [ngClass]="{'is-invalid': formularioIncidencia.controls['dias'].errors}">
                     <small *ngIf="formularioIncidencia.controls['dias'].errors">Valor (0-261)</small>
                 </div>
+                <!-- <div class="col-md-1"></div> -->
+                <div class="col-md-3">
+                    <input type="checkbox" formControlName="ausencia" id="ausencia" style="position: relative; height: 50%; top: 25%">
+                        <!-- <label for="ausencia">
+                            Es ausencia/vacaciones 
+                        </label> -->
+                        Es ausencia o vacaciones
+                </div>
             </div>
             <br>
             <div class="row">

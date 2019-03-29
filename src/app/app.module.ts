@@ -18,6 +18,7 @@ import { ConAPorPipe } from './pipes/con-apor.pipe';
 import { NuevoObjetivoComponent } from './components/nuevo-objetivo/nuevo-objetivo.component';
 import { ModobjetivoComponent } from './components/modobjetivo/modobjetivo.component';
 import { NuevaIncidenciaComponent } from './components/nueva-incidencia/nueva-incidencia.component';
+import { TfavfPipe } from './pipes/tfavf.pipe';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NuevaIncidenciaComponent } from './components/nueva-incidencia/nueva-in
     ConAPorPipe,
     NuevoObjetivoComponent,
     ModobjetivoComponent,
-    NuevaIncidenciaComponent
+    NuevaIncidenciaComponent,
+    TfavfPipe
   ],
   imports: [
     BrowserModule,

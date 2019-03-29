@@ -3,7 +3,8 @@ export interface TipoIncidencia {
   objetivo: String,
   usuario: String,
   dias: Number,
-  motivo: String
+  motivo: String,
+  ausencia: Boolean
 }
 
 export interface TipoRespuestaIncidencia {

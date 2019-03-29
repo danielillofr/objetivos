@@ -26,7 +26,8 @@ idObjetivo: string;
     }
     this.formularioIncidencia = new FormGroup({
       dias: new FormControl('', [Validators.required, Validators.pattern('([0-9])+'),this.Validar_dias]),
-      motivo: new FormControl('', [Validators.required, Validators.minLength(3)])
+      motivo: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      ausencia: new FormControl(false, Validators.required)
     });
     this.formularioIncidencia.statusChanges.subscribe(status=>{
       console.log(this.formularioIncidencia);
@@ -54,7 +55,8 @@ idObjetivo: string;
     let incidencia = {
       objetivo: this.idObjetivo,
       dias: this.formularioIncidencia.controls['dias'].value,
-      motivo: this.formularioIncidencia.controls['motivo'].value
+      motivo: this.formularioIncidencia.controls['motivo'].value,
+      ausencia: this.formularioIncidencia.controls['ausencia'].value
     }
     this.objetivoservice.Crear_incidencia(incidencia)
       .then(respuesta => {

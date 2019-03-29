@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ConAPorPipe implements PipeTransform {
 
-  transform(conseguido: number, diasProyecto: number): string {
-    diasProyecto = diasProyecto / 261;
-    conseguido = conseguido * diasProyecto;
+  transform(conseguido: number, datos:any): string {
+    datos.diasProyecto = datos.diasProyecto / datos.diasAnual;
+    conseguido = conseguido * datos.diasProyecto;
     conseguido = conseguido * 10;
     conseguido = Math.round(conseguido);
     conseguido = conseguido / 10;

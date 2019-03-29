@@ -131,9 +131,9 @@
                         <td>{{objetivo.fechaFin | fechaAFormato}}</td>
                         <td>{{objetivo.diasLaborables}}</td>
                         <td>{{objetivo.diasProyecto}}</td>
-                        <td>{{objetivo.diasProyecto | labAPor}}%</td>
+                        <td>{{objetivo.diasProyecto | labAPor:datosUsuario.datos.totales.diasAnual}}%</td>
                         <td>{{objetivo.conseguido}}%</td>
-                        <td>{{objetivo.conseguido | conAPor:objetivo.diasProyecto}}%</td>
+                        <td>{{objetivo.conseguido | conAPor:({diasProyecto:objetivo.diasProyecto,diasAnual:datosUsuario.datos.totales.diasAnual})}}%</td>
                     </tr>
                 </tbody>
             </table>
@@ -159,6 +159,7 @@
                         <td>Motivo</td>
                         <td>Dias</td>
                         <td>Porcentaje</td>
+                        <td>Ausencia</td>
                     </tr>
                 </thead>
                 <tbody class="table-bordered">
@@ -166,7 +167,9 @@
 
                         <td>{{incidencia.motivo}}</td>
                         <td>{{incidencia.dias}}</td>
-                        <td>{{incidencia.dias | labAPor}}%</td>
+                        <td>{{incidencia.dias | labAPor:datosUsuario.datos.totales.diasAnual}}%</td>
+                        <td>{{incidencia.ausencia | tfavf}}</td>
+
                     </tr>
                 </tbody>
             </table>
