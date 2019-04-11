@@ -80,14 +80,14 @@ export class ObjetivosService {
     })
   }
 
-  Modificar_conseguido = (idObjetivo, conseguido) => {
+  Modificar_conseguido = (idObjetivo, datos) => {
     const opciones = {
       headers: new HttpHeaders ({
         Authorization: this.apihttpservice.token
       })
     };
     return new Promise((resolve,reject) => {
-      this.http.put<TipoRespuestaObjetivo>(`${this.env}/api/objetivos/${idObjetivo}`,{conseguido},opciones)
+      this.http.put<TipoRespuestaObjetivo>(`${this.env}/api/objetivos/${idObjetivo}`,datos,opciones)
         .subscribe(respuesta => {
           if (!respuesta.ok) {
             console.log('Error modificando objetivo:', respuesta);

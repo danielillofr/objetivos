@@ -35,7 +35,8 @@ export class ModobjetivoComponent implements OnInit {
       nombre: new FormControl({value: '', disabled: true}),
       fechaInicio: new FormControl({value: '', disabled: true}),
       fechaFin: new FormControl('', [this.validar_fecha, Validators.pattern('([0-9]+)/([0-9]+)/([0-9]+)')]),
-      conseguido: new FormControl('', [Validators.required, Validators.pattern('([0-9]+)'), this.Validar_conseguido])
+      conseguido: new FormControl('', [Validators.required, Validators.pattern('([0-9]+)'), this.Validar_conseguido]),
+      comEvaluacion: new FormControl({value: ''})
     })
 
 
@@ -56,6 +57,7 @@ export class ModobjetivoComponent implements OnInit {
           this.formularioObjetivo.controls['fechaInicio'].setValue(this.Formatear_fecha(this.objetivoCompleto.objetivo.fechaInicio));
           this.formularioObjetivo.controls['fechaFin'].setValue(this.Formatear_fecha(this.objetivoCompleto.objetivo.fechaFin));
           this.formularioObjetivo.controls['conseguido'].setValue(this.objetivoCompleto.objetivo.conseguido);
+          this.formularioObjetivo.controls['comEvaluacion'].setValue(this.objetivoCompleto.objetivo.comEvaluacion);
         })
         .catch(err => {
           alert(err);
@@ -114,7 +116,8 @@ export class ModobjetivoComponent implements OnInit {
 
   Modificar_conseguido = () => {
     const conseguido = this.formularioObjetivo.controls['conseguido'].value;
-    this.objetivosservice.Modificar_conseguido(this.idObjetivo, conseguido)
+    const comEvaluacion = this.formularioObjetivo.controls['comEvaluacion'].value;
+    this.objetivosservice.Modificar_conseguido(this.idObjetivo, {conseguido, comEvaluacion})
       .then(respuesta => {
         alert(`Conseguido modificado correctamente a ${conseguido}%`);
         this.router.navigate(['/home', this.idUsuario]);

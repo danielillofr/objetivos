@@ -14,7 +14,8 @@ export interface TipoObjetivo {
   conseguido: Number,
   diasLaborables: Number,
   diasProyecto: Number,
-  estado: String
+  estado: String,
+  comEvaluacion: String
 }
 
 export interface TipoRespuestaObjetivo {

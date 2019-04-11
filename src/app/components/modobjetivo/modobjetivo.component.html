@@ -29,9 +29,13 @@
                     <input type="text" class="form-control" formControlName="fechaFin" id="fechaFin" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaFin'].errors}">
                     <small *ngIf="formularioObjetivo.controls['fechaFin'].errors">Fecha inválida</small>
                 </div>
-                <div class="col-md-1" *ngIf="usuarioNoIngeniero">
+                <div class="col-md-2" *ngIf="usuarioNoIngeniero">
                     <button class="btn btn-block btn-success" style="position: relative; height: 50%; top: 50%" (click)="Replanificar_objetivo()">Cambiar</button>
                 </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-2"></div>
                 <div class="col-md-2" style="text-align: center">
                     <label for="conseguido">
                       Conseguido(%)
@@ -39,10 +43,19 @@
                     <input type="text" class="form-control" formControlName="conseguido" id="conseguido" [ngClass]="{'is-invalid': formularioObjetivo.controls['conseguido'].errors}">
                     <small *ngIf="formularioObjetivo.controls['conseguido'].errors">Conseguido (0-100)</small>
                 </div>
-                <div class="col-md-1">
+                <!-- <div class="col-md-1"></div> -->
+                <div class="col-md-5" style="text-align: center">
+                        <label for="comEvaluacion">
+                          Comentario evaluación(%)
+                      </label>
+                        <input type="text" class="form-control" formControlName="comEvaluacion" id="comEvaluacion" [ngClass]="{'is-invalid': formularioObjetivo.controls['comEvaluacion'].errors}">
+                        <small *ngIf="formularioObjetivo.controls['conseguido'].errors">Conseguido (0-100)</small>
+                    </div>
+                    <div class="col-md-1">
                     <button *ngIf="usuarioNoIngeniero" class="btn btn-block btn-success" style="position: relative; height: 50%; top: 50%" (click)="Modificar_conseguido()">Evaluar</button>
                 </div>
             </div>
+            <hr>
         </div>
     </form>
     <br>
