@@ -184,6 +184,27 @@ export class ObjetivosService {
     });
   }
 
+  Cambiar_nombre_objetivo = (idObjetivo, nombre) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.apihttpservice.token
+      })
+    };
+    return new Promise((resolve,reject) => {
+      this.http.put<TipoRespuestaObjetivo>(`${this.env}/api/objetivos/${idObjetivo}`,{nombre},opciones)
+        .subscribe(respuesta => {
+          if (!respuesta.ok) {
+            console.log('Error cambiando nombre de  objetivo:', respuesta);
+            reject('Error cambiando nombre de  objetivo');
+          }
+          resolve(respuesta.objetivo);
+        }, (err => {
+          console.log('Error accediendo a base de datos');
+          reject('Error accediendo a base de datos');
+        }));
+    });
+  }
+
   Crear_incidencia = (incidencia) => {
     const opciones = {
       headers: new HttpHeaders ({

@@ -4,13 +4,16 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2"></div>
-                <div class="col-md-8" style="text-align:center">
+                <div class="col-md-6" style="text-align:center">
                     <label for="nombre">
                     Nombre
                   </label>
                     <input type="text" class="form-control" formControlName="nombre" id="nombre" [ngClass]="{'is-invalid': formularioObjetivo.controls['nombre'].errors}">
                     <small *ngIf="formularioObjetivo.controls['nombre'].errors">Longitud mínima, tres caracteres</small>
 
+                </div>
+                <div class="col-md-2" *ngIf="usuarioNoIngeniero">
+                    <button class="btn btn-block btn-success" style="position: relative; height: 50%; top: 50%" (click)="Cambiar_nombre_objetivo()">Cambiar</button>    
                 </div>
             </div>
             <div class="row">

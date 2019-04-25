@@ -32,13 +32,19 @@ export class ModobjetivoComponent implements OnInit {
     }
     this.usuarioNoIngeniero = (apihttpservice.usuarioApp.role != 'INGENIERO');
     this.formularioObjetivo = new FormGroup ({
-      nombre: new FormControl({value: '', disabled: true}),
+      nombre: new FormControl(''),
       fechaInicio: new FormControl({value: '', disabled: true}),
       fechaFin: new FormControl('', [this.validar_fecha, Validators.pattern('([0-9]+)/([0-9]+)/([0-9]+)')]),
       conseguido: new FormControl('', [Validators.required, Validators.pattern('([0-9]+)'), this.Validar_conseguido]),
       comEvaluacion: new FormControl({value: ''})
     })
-
+    
+    if(!(this.usuarioNoIngeniero)) {
+      this.formularioObjetivo.controls['nombre'].disable();
+      this.formularioObjetivo.controls['fechaFin'].disable();
+      this.formularioObjetivo.controls['conseguido'].disable();
+      this.formularioObjetivo.controls['comEvaluacion'].disable();
+    }
 
     // this.formularioObjetivo.statusChanges.subscribe(status=>{
     //   console.log('Estatus:', status);
@@ -119,7 +125,7 @@ export class ModobjetivoComponent implements OnInit {
     const comEvaluacion = this.formularioObjetivo.controls['comEvaluacion'].value;
     this.objetivosservice.Modificar_conseguido(this.idObjetivo, {conseguido, comEvaluacion})
       .then(respuesta => {
-        alert(`Conseguido modificado correctamente a ${conseguido}%`);
+        // alert(`Conseguido modificado correctamente a ${conseguido}%`);
         this.router.navigate(['/home', this.idUsuario]);
       })
       .catch(err => {
@@ -131,7 +137,7 @@ export class ModobjetivoComponent implements OnInit {
     this.objetivosservice.Cerrar_objetivo(this.idObjetivo)
       .then(respuesta => {
         const objetivoRespuesta = <TipoObjetivo>respuesta;
-        alert(`Objetivo cerrado, nueva fecha de fin:${this.Formatear_fecha(objetivoRespuesta.fechaFin)}`)
+        // alert(`Objetivo cerrado, nueva fecha de fin:${this.Formatear_fecha(objetivoRespuesta.fechaFin)}`)
         this.router.navigate(['home',this.idUsuario]);
       })
       .catch(err => {
@@ -143,7 +149,7 @@ export class ModobjetivoComponent implements OnInit {
     this.objetivosservice.Cancelar_objetivo(this.idObjetivo)
       .then(respuesta => {
         const objetivoRespuesta = <TipoObjetivo>respuesta;
-        alert(`Objetivo cerrado, nueva fecha de fin:${this.Formatear_fecha(objetivoRespuesta.fechaFin)}`)
+        // alert(`Objetivo cerrado, nueva fecha de fin:${this.Formatear_fecha(objetivoRespuesta.fechaFin)}`)
         this.router.navigate(['home',this.idUsuario]);
       })
       .catch(err => {
@@ -155,7 +161,7 @@ export class ModobjetivoComponent implements OnInit {
     this.objetivosservice.Terminar_objetivo(this.idObjetivo)
       .then(respuesta => {
         const objetivoRespuesta = <TipoObjetivo>respuesta;
-        alert('Objetivo terminado correctamente');
+        // alert('Objetivo terminado correctamente');
         this.router.navigate(['home',this.idUsuario]);
       })
       .catch(err => {
@@ -166,12 +172,24 @@ export class ModobjetivoComponent implements OnInit {
     this.objetivosservice.Replanificar_objetivo(this.idObjetivo, this.Intercambiar_fecha(this.formularioObjetivo.controls['fechaFin'].value))
       .then(respuesta => {
         const objetivoRespuesta = <TipoObjetivo>respuesta;
-        alert(`Objetivo replanificado, nueva fecha de fin:${this.Formatear_fecha(objetivoRespuesta.fechaFin)}`)
+        // alert(`Objetivo replanificado, nueva fecha de fin:${this.Formatear_fecha(objetivoRespuesta.fechaFin)}`)
         this.router.navigate(['home',this.idUsuario]);
       })
       .catch(err => {
         alert(err)
       })
+  }
+
+  Cambiar_nombre_objetivo = () => {
+    this.objetivosservice.Cambiar_nombre_objetivo(this.idObjetivo, this.formularioObjetivo.controls['nombre'].value)
+      .then(respuesta => {
+        const objetivoRespuesta = <TipoObjetivo>respuesta;
+        // alert(`Objetivo cambiado nombre correctamente`);
+        this.router.navigate(['home',this.idUsuario]);
+      })
+      .catch(err => {
+        alert(err)
+      })    
   }
 
   ngOnInit() {
