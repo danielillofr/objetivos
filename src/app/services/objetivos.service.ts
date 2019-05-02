@@ -59,6 +59,27 @@ export class ObjetivosService {
     })
   }
 
+  Eliminar_objetivo = (idObjetivo) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.apihttpservice.token
+      })
+    };
+    return new Promise((resolve,reject) => {
+      this.http.delete<TipoRespuestaObjetivo>(`${this.env}/api/objetivos/${idObjetivo}`, opciones)
+        .subscribe(respuesta => {
+          if (!respuesta.ok) {
+            console.log('Error eliminando objetivo:', respuesta);
+            reject('Error eliminando objetivo');
+          }
+          resolve(respuesta.objetivo);
+        }, err => {
+          console.log('Error accediendo a la base de datos:', err);
+          reject ('Error obteniendo lista de usuarios:');
+        })
+    })
+  }
+
   Obtener_objetivo_completo = (idObjetivo) => {
     const opciones = {
       headers: new HttpHeaders ({

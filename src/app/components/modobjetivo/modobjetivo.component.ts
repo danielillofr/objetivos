@@ -193,6 +193,20 @@ export class ModobjetivoComponent implements OnInit {
       })    
   }
 
+  Eliminar_objetivo = () => {
+    if (!(confirm('Estas seguro?'))) {
+      return;
+    }
+    this.objetivosservice.Eliminar_objetivo(this.idObjetivo)
+      .then(respuesta => {
+        this.router.navigate(['home',this.idUsuario]);
+      })
+      .catch(err => {
+        alert(err)
+      })
+  }
+
+
   ngOnInit() {
   }
 
