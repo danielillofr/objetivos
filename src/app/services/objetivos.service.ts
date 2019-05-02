@@ -163,14 +163,14 @@ export class ObjetivosService {
     });
   }
 
-  Replanificar_objetivo = (idObjetivo, fechaFin) => {
+  Replanificar_objetivo = (idObjetivo,fechaInicio, fechaFin) => {
     const opciones = {
       headers: new HttpHeaders ({
         Authorization: this.apihttpservice.token
       })
     };
     return new Promise((resolve,reject) => {
-      this.http.post<TipoRespuestaObjetivo>(`${this.env}/api/objetivos/replanificar/${idObjetivo}`,{fechaFin},opciones)
+      this.http.post<TipoRespuestaObjetivo>(`${this.env}/api/objetivos/replanificar/${idObjetivo}`,{fechaInicio, fechaFin},opciones)
         .subscribe(respuesta => {
           if (!respuesta.ok) {
             console.log('Error replanificando objetivo:', respuesta);

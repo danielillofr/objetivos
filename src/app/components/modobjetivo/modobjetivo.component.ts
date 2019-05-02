@@ -33,7 +33,7 @@ export class ModobjetivoComponent implements OnInit {
     this.usuarioNoIngeniero = (apihttpservice.usuarioApp.role != 'INGENIERO');
     this.formularioObjetivo = new FormGroup ({
       nombre: new FormControl(''),
-      fechaInicio: new FormControl({value: '', disabled: true}),
+      fechaInicio: new FormControl('', [this.validar_fecha, Validators.pattern('([0-9]+)/([0-9]+)/([0-9]+)')]),
       fechaFin: new FormControl('', [this.validar_fecha, Validators.pattern('([0-9]+)/([0-9]+)/([0-9]+)')]),
       conseguido: new FormControl('', [Validators.required, Validators.pattern('([0-9]+)'), this.Validar_conseguido]),
       comEvaluacion: new FormControl({value: ''})
@@ -41,6 +41,7 @@ export class ModobjetivoComponent implements OnInit {
     
     if(!(this.usuarioNoIngeniero)) {
       this.formularioObjetivo.controls['nombre'].disable();
+      this.formularioObjetivo.controls['fechaInicio'].disable();
       this.formularioObjetivo.controls['fechaFin'].disable();
       this.formularioObjetivo.controls['conseguido'].disable();
       this.formularioObjetivo.controls['comEvaluacion'].disable();
@@ -169,7 +170,7 @@ export class ModobjetivoComponent implements OnInit {
       })
   }
   Replanificar_objetivo = () => {
-    this.objetivosservice.Replanificar_objetivo(this.idObjetivo, this.Intercambiar_fecha(this.formularioObjetivo.controls['fechaFin'].value))
+    this.objetivosservice.Replanificar_objetivo(this.idObjetivo, this.Intercambiar_fecha(this.formularioObjetivo.controls['fechaInicio'].value), this.Intercambiar_fecha(this.formularioObjetivo.controls['fechaFin'].value))
       .then(respuesta => {
         const objetivoRespuesta = <TipoObjetivo>respuesta;
         // alert(`Objetivo replanificado, nueva fecha de fin:${this.Formatear_fecha(objetivoRespuesta.fechaFin)}`)
