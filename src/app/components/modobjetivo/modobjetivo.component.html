@@ -22,15 +22,16 @@
                     <label for="fechaInicio">
                       Fecha inicio
                   </label>
-                    <input type="text" class="form-control" formControlName="fechaInicio" id="fechaInicio" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaInicio'].errors}">
+                    <input type="text" #fechaInicio name="fechaInicio" class="form-control" formControlName="fechaInicio" id="fechaInicio" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaInicio'].errors}">
                     <small *ngIf="formularioObjetivo.controls['fechaInicio'].errors">Fecha inválida</small>
                 </div>
                 <div class="col-md-2" style="text-align: center">
                     <label for="fechaFin">
                       Fecha fin
                   </label>
-                    <input type="text" class="form-control" formControlName="fechaFin" id="fechaFin" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaFin'].errors}">
-                    <small *ngIf="formularioObjetivo.controls['fechaFin'].errors">Fecha inválida</small>
+                  <input type="text" #fechaFin name="fechaFin" class="form-control" formControlName="fechaFin" id="fechaFin" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaFin'].errors}">
+                  <input type="text" #NiIdea name="NiIdea" class="form-control" [ngClass]="{'is-invalid': formularioObjetivo.controls['fechaFin'].errors}">
+                  <small *ngIf="formularioObjetivo.controls['fechaFin'].errors">Fecha inválida</small>
                 </div>
                 <div class="col-md-2" *ngIf="usuarioNoIngeniero">
                     <button class="btn btn-block btn-success" style="position: relative; height: 50%; top: 50%" (click)="Replanificar_objetivo()">Cambiar</button>

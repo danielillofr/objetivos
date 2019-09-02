@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApihttpService } from './../../services/apihttp.service';
 import { ObjetivosService } from './../../services/objetivos.service';
@@ -7,7 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { validateConfig } from '@angular/router/src/config';
 import { TipoObjetivo } from '../../interfaces/objetivo.interface';
 
-
+declare function initDatePicker();
 
 @Component({
   selector: 'app-nuevo-objetivo',
@@ -17,6 +17,8 @@ import { TipoObjetivo } from '../../interfaces/objetivo.interface';
 export class NuevoObjetivoComponent implements OnInit {
   idUsuario: string;
   formularioObjetivo: FormGroup;
+  @ViewChild('fechaInicio') fechaInicio: ElementRef;
+  @ViewChild('fechaFin') fechaFin: ElementRef;
   constructor(private activatedroute: ActivatedRoute,
               private router: Router,
               private apihttpservice: ApihttpService,
@@ -57,6 +59,10 @@ export class NuevoObjetivoComponent implements OnInit {
        alert('Hay errores en el formulario');
        return;
      }
+
+     this.formularioObjetivo.controls['fechaInicio'].setValue(this.fechaInicio.nativeElement.value);
+     this.formularioObjetivo.controls['fechaFin'].setValue(this.fechaFin.nativeElement.value);
+
      let objetivoCrear = {
       usuario: this.idUsuario,
       nombre: this.formularioObjetivo.controls['nombre'].value,
@@ -97,6 +103,7 @@ export class NuevoObjetivoComponent implements OnInit {
    }
 
   ngOnInit() {
+    initDatePicker();
   }
 
 }

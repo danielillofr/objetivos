@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterContentInit, AfterContentChecked } from '@angular/core';
 import { TipoObjetivoCompleto,TipoObjetivo } from './../../interfaces/objetivo.interface';
 import { TipoIncidencia } from './../../interfaces/incidencia.interface';
 import { TipoLog } from './../../interfaces/log.interface';
@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TipoUsuario } from '../../interfaces/usuario.interface';
 
-
+declare function initDatePicker();
 
 
 
@@ -17,7 +17,10 @@ import { TipoUsuario } from '../../interfaces/usuario.interface';
   templateUrl: './modobjetivo.component.html',
   styleUrls: ['./modobjetivo.component.css']
 })
-export class ModobjetivoComponent implements OnInit {
+export class ModobjetivoComponent implements OnInit, AfterContentChecked {
+  @ViewChild('fechaInicio') fechaInicio: ElementRef;
+  @ViewChild('fechaFin') fechaFin: ElementRef;
+
   objetivoCompleto: TipoObjetivoCompleto = null;
   formularioObjetivo: FormGroup;
   idObjetivo: String;
@@ -170,6 +173,8 @@ export class ModobjetivoComponent implements OnInit {
       })
   }
   Replanificar_objetivo = () => {
+    this.formularioObjetivo.controls['fechaInicio'].setValue(this.fechaInicio.nativeElement.value);
+    this.formularioObjetivo.controls['fechaFin'].setValue(this.fechaFin.nativeElement.value);    
     this.objetivosservice.Replanificar_objetivo(this.idObjetivo, this.Intercambiar_fecha(this.formularioObjetivo.controls['fechaInicio'].value), this.Intercambiar_fecha(this.formularioObjetivo.controls['fechaFin'].value))
       .then(respuesta => {
         const objetivoRespuesta = <TipoObjetivo>respuesta;
@@ -209,5 +214,11 @@ export class ModobjetivoComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  ngAfterContentChecked() {
+    console.log("Renderizado");
+    initDatePicker();
+  }
+
 
 }
